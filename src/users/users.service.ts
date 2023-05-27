@@ -33,13 +33,12 @@ export class UsersService {
   findOne (id: string) {
     const isIDValid = isValidObjectId(id)
 
-    if (!isIDValid) 
-      return 'not found user'
+    if (!isIDValid) return 'not found user'
     return this.userModel.findOne({ _id: id })
   }
 
-  update (id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`
+   async update (updateUserDto: UpdateUserDto) {
+    return await this.userModel.updateOne({ _id: updateUserDto._id }, {...updateUserDto})
   }
 
   remove (id: number) {
